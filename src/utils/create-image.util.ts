@@ -1,21 +1,25 @@
 import sharp from "sharp"
 
-import { createImageDefaultChannels, createImageDefaultFill, createImageDefaultFormat } from "../constants"
+import { createImageDefaultOptions } from "../constants"
+
+export type ImageChannels = 3 | 4
+
+export type ImageFormat = "png" | "jpeg" | "webp" | "avif" | "gif"
 
 export type CreateImageOptions = {
     width: number
     height: number
     fill?: sharp.Color
-    channels?: 3 | 4 
-    format?: "png" | "jpeg" | "webp" | "avif" | "gif"
+    channels?: ImageChannels
+    format?: ImageFormat
 }
 
 function createImage({
     width,
     height,
-    fill = createImageDefaultFill,
-    channels = createImageDefaultChannels,
-    format = createImageDefaultFormat,
+    fill = createImageDefaultOptions.fill,
+    channels = createImageDefaultOptions.chnannels as ImageChannels,
+    format = createImageDefaultOptions.format as ImageFormat,
 }: CreateImageOptions) {
     return sharp({
         create: {

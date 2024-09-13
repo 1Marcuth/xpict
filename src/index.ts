@@ -1,6 +1,7 @@
 import sharp, { Sharp } from "sharp"
 
 import { defautltTemplateAcitonType } from "./constants"
+import cloneImage from "./utils/clone-image.util.ts"
 
 export type Image = Sharp
 
@@ -58,7 +59,8 @@ async function processImageTemplate(template: ImageTemplate): Promise<Image> {
     let image = template.image
 
     for (const action of actions.before) {
-        image = await action(image)
+        const imageResult = await action(image)
+        image = await cloneImage(imageResult)
     }
 
     if (template.layers) {
@@ -79,7 +81,8 @@ async function processImageTemplate(template: ImageTemplate): Promise<Image> {
     }
 
     for (const action of actions.after) {
-        image = await action(image)
+        const imageResult = await action(image)
+        image = await cloneImage(imageResult)
     }
 
     return image

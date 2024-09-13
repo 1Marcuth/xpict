@@ -47,7 +47,6 @@ const template2 = {
             },
             x: 10,
             y: 50,
-            anchor: "middle-center"
         })
     ],
     // layers: [

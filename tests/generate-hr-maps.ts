@@ -24,15 +24,14 @@ const lapBaseImageTemplate = {
     image: createImage({
         width: 1280,
         height: 720,
-        fill: "#FFF"
+        fill: "#020817"
     }),
 } satisfies ImageTemplate
 
 const nodeBaseImageTemplate = {
     image: createImage({
         width: 600,
-        height: 200,
-        fill: hex(0x000000)
+        height: 200
     })
 } satisfies ImageTemplate
 
@@ -43,29 +42,27 @@ const nodeBaseImageTemplate = {
             actions: [
                insertText({
                     x: 491,
-                    y: 590,
+                    y: 640,
                     font: {
                         name: "curse-casual",
-                        filePath: path.resolve(__dirname, "..", "Curse Casual.ttf"),
+                        filePath: path.resolve(__dirname, "..", "fonts", "Curse Casual.ttf"),
                         size: 80,
-                        color: "#FFF",
+                        color: "#FFFFFF",
                     },
                     text: `Lap ${lapNumber}`,
                     anchor: "middle-center",
                     stroke: {
-                        fill: "#000",
+                        fill: "#000000",
                         width: 3
                     }
                }) 
             ]
         })
-
+        
         for (let nodeNumber = 1; nodeNumber <= 5; nodeNumber++) {
             const imageMetadata = await nodeBaseImageTemplate.image.metadata()
             const imageWith = imageMetadata.width!
             const imageHeight = imageMetadata.height!
-
-            console.log(imageWith, imageHeight)
 
             const nodeImageTemplate = extendImageTemplate(nodeBaseImageTemplate, {
                 actions: [
@@ -74,19 +71,21 @@ const nodeBaseImageTemplate = {
                         y: 0,
                         width: imageWith,
                         height: imageHeight,
-                        fill: "#ccc"
+                        fill: "#0F172A",
+                        borderRadius: 15,
                     }),
                     insertText({
-                        x: 15,
-                        y: 0,
+                        x: 90,
+                        y: 150,
                         font: {
                             name: "curse-casual",
-                            filePath: path.resolve(__dirname, "..", "Curse Casual.ttf"),
+                            filePath: path.resolve(__dirname, "..", "fonts", "Curse Casual.ttf"),
                             size: 35,
                             color: "#FFF",
                         },
                         text: `Node ${nodeNumber}`,
                         anchor: "middle-center",
+                        rotation: -90,
                         stroke: {
                             fill: "#000",
                             width: 2

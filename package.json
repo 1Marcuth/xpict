@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "ts-node ./tests/index.ts",
-    "test:hr": "ts-node ./tests/generate-hr-maps.ts"
+    "test:hr": "ts-node ./tests/generate-hr-maps.ts",
+    "build:clean": "rimraf dist",
+    "compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "build": "npm-run-all build:clean compile generate-exports && node ./dev-scripts/prepare-package-json.js",
+    "generate-exports": "node dev-scripts/generate-exports.cjs"
   },
   "keywords": [],
   "author": "Marcuth",
@@ -16,5 +20,59 @@
     "sharp": "^0.33.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^6.0.1"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./actions": {
+      "import": "./dist/esm/actions.js",
+      "require": "./dist/cjs/actions.js",
+      "default": "./dist/esm/actions.js",
+      "types": "./dist/types/actions.d.ts"
+    },
+    "./constants": {
+      "import": "./dist/esm/constants.js",
+      "require": "./dist/cjs/constants.js",
+      "default": "./dist/esm/constants.js",
+      "types": "./dist/types/constants.d.ts"
+    },
+    "./utils/clone-image.util.ts": {
+      "import": "./dist/esm/utils/clone-image.util.ts.js",
+      "require": "./dist/cjs/utils/clone-image.util.ts.js",
+      "default": "./dist/esm/utils/clone-image.util.ts.js",
+      "types": "./dist/types/utils/clone-image.util.ts.d.ts"
+    },
+    "./utils/color.util": {
+      "import": "./dist/esm/utils/color.util.js",
+      "require": "./dist/cjs/utils/color.util.js",
+      "default": "./dist/esm/utils/color.util.js",
+      "types": "./dist/types/utils/color.util.d.ts"
+    },
+    "./utils/create-image.util": {
+      "import": "./dist/esm/utils/create-image.util.js",
+      "require": "./dist/cjs/utils/create-image.util.js",
+      "default": "./dist/esm/utils/create-image.util.js",
+      "types": "./dist/types/utils/create-image.util.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/esm/utils/index.js",
+      "require": "./dist/cjs/utils/index.js",
+      "default": "./dist/esm/utils/index.js",
+      "types": "./dist/types/utils/index.d.ts"
+    },
+    "./utils/open-image.util": {
+      "import": "./dist/esm/utils/open-image.util.js",
+      "require": "./dist/cjs/utils/open-image.util.js",
+      "default": "./dist/esm/utils/open-image.util.js",
+      "types": "./dist/types/utils/open-image.util.d.ts"
+    }
   }
 }

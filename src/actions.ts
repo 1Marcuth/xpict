@@ -1,7 +1,7 @@
 import { createCanvas, registerFont } from "canvas"
 import sharp from "sharp"
 
-import { colors, insertTextDefaultAnchor, insertTextDefaultBackgroundColor, insertTextDefaultRotation } from "./constants"
+import { colors, insertTextDefaultOptions } from "./constants"
 import { Image } from "."
 
 function toGrayScale(grayscale: boolean = true) {
@@ -122,10 +122,10 @@ function insertText({
     font,
     x,
     y,
-    backgroundColor = insertTextDefaultBackgroundColor,
-    anchor = insertTextDefaultAnchor,
+    backgroundColor = insertTextDefaultOptions.backgroundColor,
+    anchor = insertTextDefaultOptions.anchor as TextAnchor,
     stroke,
-    rotation = insertTextDefaultRotation
+    rotation = insertTextDefaultOptions.rotation
 }: InsertTextOptions) {
     return async (image: Image) => {
         const imageMetadata = await image.metadata()
@@ -147,7 +147,7 @@ function insertText({
             )
         }
 
-        context.font = `${font.size}px ${font.name}`
+        context.font = `${font.size}px ${font.name ?? insertTextDefaultOptions.font.name}`
         context.fillStyle = font.color ?? colors.black
 
         const textMetrics = context.measureText(text)
@@ -368,8 +368,6 @@ function insertLine({
         ])
     }
 }
-
-
  
 export {
     toGrayScale,
