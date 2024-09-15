@@ -1,8 +1,10 @@
 {
   "name": "xpict",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.3",
+  "description": "Generation of standardized images from predefined templates and functions",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "test": "ts-node ./tests/index.ts",
     "test:hr": "ts-node ./tests/generate-hr-maps.ts",
@@ -27,10 +29,10 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./actions": {
       "import": "./dist/esm/actions.js",
